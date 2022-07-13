@@ -1,11 +1,11 @@
-from abc import ABCMeta, abstractmethod, ABC
+from abc import ABCMeta, abstractmethod
 import json
 import pickle
-import logging
 from my_logger import get_logger
 
 logger = get_logger(__name__)
 
+# 1
 
 class SerializationInterface(metaclass=ABCMeta):
     def __init__(self, data, filename):
@@ -72,20 +72,20 @@ class SerializeBin(SerializationInterface):
             print(unpacked)
 
 
-# задание 2
+# 2
 
 class Meta(type):
     class_number = 0
     children_number = 0
     logger.debug(f'{children_number, class_number}')
 
-    def __new__(cls, *args):
-        instance = type.__new__(cls, *args)
-        if cls.children_number == 0:
-            cls.class_number = 0
-        instance.class_number = cls.class_number
-        cls.class_number += 1
-        cls.children_number += 1
+    def __new__(mcs, *args):
+        instance = type.__new__(mcs, *args)
+        if mcs.children_number == 0:
+            mcs.class_number = 0
+        instance.class_number = mcs.class_number
+        mcs.class_number += 1
+        mcs.children_number += 1
         logger.info(f'{instance}')
         return instance
 
