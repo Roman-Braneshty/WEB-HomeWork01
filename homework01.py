@@ -42,8 +42,6 @@ print(instance_json.deserialize('test.json'))
 
 
 # 2
-
-
 class Meta(type):
     class_number = 0
 
